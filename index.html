@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>KARYNPROJECT - Accessing Secure System</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: monospace;
+      font-size: 18px;
+      color: #00ff00;
+      background: url('foto.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+    #terminal {
+      white-space: pre-wrap;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.75); /* semi-transparan agar teks tetap terbaca */
+      height: 100vh;
+      animation: glitch 0.5s infinite;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 0 0 2px #00ff00; }
+      50% { text-shadow: -2px 0 red, 2px 0 blue; }
+      100% { text-shadow: 0 0 2px #00ff00; }
+    }
+  </style>
+</head>
+<body>
+  <div id="terminal">Memulai akses sistem...</div>
+
+  <script>
+    const terminal = document.getElementById('terminal');
+    const lines = [
+      "Mendeteksi IP target...",
+      "IP ditemukan: 192.168.1.21",
+      "Mengakses kamera...",
+      "Gagal. Kamera dilindungi.",
+      "Mengakses lokasi GPS...",
+      "Lokasi ditemukan: Banjarnegara, ID",
+      "Mencoba override sistem...",
+      "[!] Sistem keamanan aktif...",
+      "[X] ERROR! SYSTEM FAILURE!",
+      "Mengambil file sistem...",
+      "File: SYSTEM32\\config\\loaded",
+      "File: SYSTEM32\\user.dll found",
+      "Injecting payload...",
+      "== PAYLOAD AKTIF ==",
+      "Perangkat akan shutdown dalam 3 detik...",
+      "3...",
+      "2...",
+      "1...",
+      "💀 SYSTEM SHUTDOWN INITIATED 💀",
+      "Terlambat... Kamu sudah dimata-matai",
+      "Salam dari KARYNPROJECT."
+    ];
+    let i = 0;
+
+    function writeLine() {
+      if (i < lines.length) {
+        terminal.innerHTML += '\n' + lines[i];
+        i++;
+        setTimeout(writeLine, 800);
+      } else {
+        // Efek freeze
+        document.body.style.pointerEvents = "none";
+        terminal.style.animation = "none";
+        terminal.innerHTML += "\n\n⛔ Semua kendali diambil alih.";
+      }
+    }
+
+    setTimeout(writeLine, 1000);
+  </script>
+</body>
+</html>
